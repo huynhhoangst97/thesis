@@ -6,7 +6,7 @@ app.set("views", "./views");
 app.set("view engine", "ejs");
 
  var app = express();
- app.listen(process.env.PORT|3000,console.log("server is runing at 3000"));
+ app.listen(process.env.PORT||3000,console.log("server is runing at 3000"));
 
  // setup public folder
 app.use(express.static("public"));
