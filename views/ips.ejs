@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script src="lib/bootstrap.min.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -43,9 +44,13 @@
         </div><!-- /.container-fluid -->
     </nav>
     <div class="container-fluid" style="margin-top: 80px">
-        <canvas id="myCanvas" width="1000" height="500" style="border: solid 1px black"></canvas>
+        <div class="row">
+            <div class="col-md-9">
+                <canvas id="myCanvas" style="border: solid 1px black" width="1000" height="600"></canvas>
+            </div>
+        </div>
     </div>
-    <footer class="">
+    <footer class="" style="margin-top: 50px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -83,18 +88,12 @@
             </div>
         </div>
     </footer>
+    
+    <!--script-->
+    <script type="text/javascript" src="lib/imageloader.min.js"></script>
+	<script type="text/javascript" src="lib/canvaszoom.min.js"></script>
+    <script src="js/ips.js"></script>
 </body>
-<script>
-    // Lấy thẻ HTML Canvas
-    var canvas = document.getElementById('myCanvas');
 
-    // Vẽ ở mô hình 2D
-    var ctx = canvas.getContext('2d');
-
-    ctx.beginPath();
-    ctx.arc(100, 300, 10, 0, 2 * Math.PI);
-    ctx.fillStyle = '#FE0000';
-    ctx.fill();
-</script>
 
 </html>
