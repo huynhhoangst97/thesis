@@ -1,47 +1,28 @@
 var express = require('express');
 var app = express();
-var mysql = require('mysql');
+var mysql=require('mysql');
 var server = require("http").Server(app);
 var io = require('socket.io')(server);
-var mongoose =require('mongoose');
-
-//connect mongodb
-mongoose.connect('mongodb+srv://huynhhoang:songbenkhoanglang1@ips-kq7wc.mongodb.net/ips',{ useNewUrlParser: true });var Schema = mongoose.Schema;
-
-var personSchema = new Schema({
-	thu:String,
-	name: {
-		first: String,
-		last: String
-	}
-});
-var Person = mongoose.model('nguoi', personSchema,'location');
-
-//create connection
-const db = mysql.createConnection({
-	host: "sql9.freemysqlhosting.net",
-	user: "sql9281167",
-	password: "QFpnvu4aCL",
-	database: 'sql9281167'
-});
+var user = require('./model/user');
+var location = require('./model/location');
 
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
-//test database 
-io.on("connection",(socket)=>{
-	let sqlQuery = "SELECT * FROM posts";
-	db.query(sqlQuery,(err,result)=>{
+// user.showUser((err,data)=>{
+// 	console.log(data);
+// })
+
+io.on("connection",socket=>{
+	location.find({thu:'test'},(err,res)=>{
 		if(err) throw err;
-		io.emit("database",result);
-		Person.find({thu:'test'},(err,res)=>{
-			if(err) throw err;
-			io.emit('mongo',res)
-		})
-	});
+		socket.emit('mongo',res);
+	})
+	user.showUser((err,data)=>{
+		if(err) throw err;
+		socket.emit('database',data);
+	})
 });
-
-
 
 // setup public folder
 app.use(express.static("public"));
@@ -53,6 +34,8 @@ var loginPage = require('./routes/loginPage.js');
 app.use("/loginPage", loginPage);
 var ips = require('./routes/ips.js');
 app.use("/ips", ips);
+var readData = require('./routes/readdata.js');
+app.use("/readdata", readData);
 // const err = require('./routes/404.js');
 // app.use('*', err);
 
