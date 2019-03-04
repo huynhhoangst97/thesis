@@ -3,6 +3,19 @@ var app = express();
 var mysql = require('mysql');
 var server = require("http").Server(app);
 var io = require('socket.io')(server);
+var mongoose =require('mongoose');
+
+//connect mongodb
+mongoose.connect('mongodb+srv://huynhhoang:songbenkhoanglang1@ips-kq7wc.mongodb.net/ips',{ useNewUrlParser: true });var Schema = mongoose.Schema;
+
+var personSchema = new Schema({
+	thu:String,
+	name: {
+		first: String,
+		last: String
+	}
+});
+var Person = mongoose.model('nguoi', personSchema,'location');
 
 //create connection
 const db = mysql.createConnection({
@@ -21,8 +34,14 @@ io.on("connection",(socket)=>{
 	db.query(sqlQuery,(err,result)=>{
 		if(err) throw err;
 		io.emit("database",result);
+		Person.find({thu:'test'},(err,res)=>{
+			if(err) throw err;
+			io.emit('mongo',res)
+		})
 	});
 });
+
+
 
 // setup public folder
 app.use(express.static("public"));

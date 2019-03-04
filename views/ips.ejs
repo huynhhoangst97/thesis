@@ -101,6 +101,9 @@
             socket.on("database", (data) => {
                 console.log(data);
             });
+            socket.on('mongo',(data)=>{
+                console.log(data[0]['thu']);
+            })
         })
     </script>
 </body>
