@@ -4,9 +4,9 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 var router=express.Router();
 
-router.post('/',(req,res)=>{
-    var u= req.body.latitude;
-    var p= req.body.longitude;
-    res.send("user:"+u+"pas:"+p);
+router.get('/',(req,res)=>{
+    var u= req.query.latitude;
+    var p= req.query.longitude;
+    res.send("user:"+u+"    "+"pas:"+p);
 });
 module.exports=router;

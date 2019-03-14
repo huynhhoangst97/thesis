@@ -45,7 +45,7 @@ var ips = require('./routes/ips.js');
 app.use("/ips", ips);
 var readData = require('./routes/readdata.js');
 app.use("/readdata", readData);
-//const err = require('./routes/404.js');
-//app.use('*', err);
+const err = require('./routes/404.js');
+app.use('*', err);
 
 server.listen(process.env.PORT || 3000, console.log("server is runing at 3000"));
