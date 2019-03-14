@@ -1,12 +1,12 @@
 var db = require('../connectMongodb');
 
 var Schema =db.Schema;
-var personSchema = new Schema({
-	thu:String,
-	name: {
-		first: String,
-		last: String
+var locaitionSchema = new Schema({
+	tag:String,
+	location: {
+		xcale: Number,
+		ycale: Number
 	}
 });
-var Person = db.model('nguoi', personSchema,'location');
-module.exports= Person;
+var location = db.model('location', locaitionSchema,'location');
+module.exports= location;

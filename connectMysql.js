@@ -1,8 +1,8 @@
 var mysql =require('mysql');
 var mysqlConnection = mysql.createConnection({
 	host: "sql9.freemysqlhosting.net",
-	user: "sql9281167",
-	password: "QFpnvu4aCL",
-	database: 'sql9281167'
+	user: "sql9283294",
+	password: "v7zJgtU9nY",
+	database: 'sql9283294'
 });
 module.exports= mysqlConnection;

@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-var mysql=require('mysql');
 var server = require("http").Server(app);
 var io = require('socket.io')(server);
 var user = require('./model/user');
@@ -13,14 +12,24 @@ app.set("view engine", "ejs");
 // 	console.log(data);
 // })
 
-io.on("connection",socket=>{
-	location.find({thu:'test'},(err,res)=>{
-		if(err) throw err;
-		socket.emit('mongo',res);
+// location.create({
+// 	tag: "aa02",
+// 	location: {
+// 		xcale: 14.5,
+// 		ycale: 34
+// 	}
+// }, (err, doc) => {
+// 	if (err) throw err;
+// })
+
+io.on("connection", socket => {
+	location.find({ tag: 'aa02' }, (err, res) => {
+		if (err) throw err;
+		socket.emit("mongo",res);
 	})
-	user.showUser((err,data)=>{
-		if(err) throw err;
-		socket.emit('database',data);
+	user.showUser((err, data) => {
+		if (err) throw err;
+		socket.emit('database', data);
 	})
 });
 
@@ -36,7 +45,7 @@ var ips = require('./routes/ips.js');
 app.use("/ips", ips);
 var readData = require('./routes/readdata.js');
 app.use("/readdata", readData);
-// const err = require('./routes/404.js');
-// app.use('*', err);
+//const err = require('./routes/404.js');
+//app.use('*', err);
 
 server.listen(process.env.PORT || 3000, console.log("server is runing at 3000"));
