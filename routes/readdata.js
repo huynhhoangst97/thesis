@@ -1,16 +1,14 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var db = require('../connectMysql');
+//var db = require('../connectMysql');
 var router=express.Router();
-
+var location = require('../model/location');
 
 router.get("/",(req,res)=>{
-	let post= {id:req.query.id, ten:req.query.ten};
-	let sql="INSERT INTO posts SET ?";
-	db.query(sql,post,(err,result)=>{
-		if (err) throw err;
-		res.send("insert successed..");
+	location.findOneAndUpdate({tag:"aa02"},{location:{xcale:req.query.longitude,ycale:req.query.latitude}},(err,result)=>{
+			if(err) throw err;
+			res.send("successful");
 	})
 });
 module.exports=router;
