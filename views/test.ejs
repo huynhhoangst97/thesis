@@ -1,0 +1,28 @@
+<html>
+  <header>
+    <title>Test</title>
+    <script src="lib/jquery.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  </header>
+  <body>
+    <div id="date"></div>
+    <h1>hello</h1>
+    <div id="a"></div>
+    <!--script-->
+    <script>
+      $(document).ready(() => {
+        setInterval(() => {
+          $.ajax({
+            url: "../product",
+            method:"POST",
+            contentType: "application/json",
+            success: function(response) {
+              $('#a').empty();
+              $('#a').append("x:"+response.xcale+" y:"+response.ycale);
+            }
+          });
+        }, 500);
+      });
+    </script>
+  </body>
+</html>
