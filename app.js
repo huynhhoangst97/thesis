@@ -4,7 +4,7 @@ var server = require("http").Server(app);
 var io = require("socket.io")(server);
 var user = require("./model/user");
 var location = require("./model/location");
-var clasLocation = require("./classLocation");
+var classLocation = require("./classLocation");
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
@@ -38,7 +38,7 @@ io.on("connection", socket => {
 app.use(express.static("public"));
 
 // -------------setup routes-----------------
-var toaDo = new clasLocation();
+var toaDo = new classLocation();
 app.post("/product", (req, res) => {
   location.find({ tag: "aa02" }, (err, result) => {
     toaDo.xcale = result[0]["location"]["xcale"];

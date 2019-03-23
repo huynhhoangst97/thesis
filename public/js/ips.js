@@ -1,42 +1,48 @@
 var a = new Image();
-a.src = 'img/110b3.png';
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
-window.onload = function () {
-    ctx.drawImage(a, 0, 0, canvas.width, canvas.height);
-    
-}
+var icon = new Image();
+// function init(){
+//   a.src = "img/110b3-2.png";
+//   var canvas = document.getElementById("myCanvas");
+//   var ctx = canvas.getContext("2d");
+//   function draw(){
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+//     ctx.drawImage(a, 0, 0, canvas.width, canvas.height);
+//     ctx.beginPath();
+//     ctx.arc(canvas.width*Math.random(), canvas.height*Math.random(), 6, 0, 2 * Math.PI,false);
+//     ctx.fillStyle="red";
+//     ctx.fill();
+//     window.requestAnimationFrame(draw);
+//   }
+//   draw();
+// }
+// window.addEventListener('load',init,false);
 
-canvas.addEventListener("wheel", (e) => {
-    clearImage();
-    if (e.deltaY < 0) {
-        ctx.scale(1.1, 1.1);
+window.onload = function() {
+  a.src = "img/110b3-2.png";
+  icon.src = "img/icon.png";
+  var canvas = document.getElementById("myCanvas");
+  var ctx = canvas.getContext("2d");
+  ctx.arc(100 * Math.random(), 30, 6, 0, 2 * Math.PI);
+  setInterval(() => {
+    $.ajax({
+      url: "../product",
+      method: "POST",
+      contentType: "application/json",
+      success: function(response) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(a, 0, 0, canvas.width, canvas.height);
-        ctx.beginPath();
-    ctx.arc(30, 30, 20, 0, 2 * Math.PI);
-        ctx.fillStyle = 'red';
-        ctx.fill();
-    }
-    else {
-        ctx.scale(0.9, 0.9);
-        ctx.drawImage(a, 0, 0, canvas.width, canvas.height);
-        ctx.beginPath();
-    ctx.arc(30, 30, 20, 0, 2 * Math.PI);
-        ctx.fillStyle = 'red';
-        ctx.fill();
-    }
-    event.preventDefault();
-
-},false);
-function setTran() {
-
-}
-//-draw circle--
-/*
-ctx.arc(30, 30, 20, 0, 2 * Math.PI);
-    ctx.fillStyle = 'red';
-    ctx.fill();
-*/
-function clearImage() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
+        ctx.drawImage(
+          icon,
+          (canvas.width * response.xcale) / 3,
+          (canvas.height * response.ycale) / 3,
+          30,
+          30
+        );
+      }
+    });
+    // ctx.beginPath();
+    // ctx.arc(canvas.width*Math.random(), canvas.height*Math.random(), 6, 0, 2 * Math.PI,false);
+    // ctx.fillStyle="red";
+    // ctx.fill();
+  }, 1000);
+};
