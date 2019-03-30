@@ -1,0 +1,9 @@
+width: 1226;
+height: 570;
+
+vi tri phong:(725;131);(233;442)
+
+
+thuc te:
+width: 4.9;
+height:9.05;
