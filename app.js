@@ -41,7 +41,7 @@ app.use(express.static("public"));
 var toaDo = new classLocation();
 app.post("/product", (req, res) => {
   location.find({ tag: "aa02" }, (err, result) => {
-    toaDo.xcale = result[0]["location"]["xcale"];
+  toaDo.xcale = result[0]["location"]["xcale"];
 	toaDo.ycale = result[0]["location"]["ycale"];
   });
   res.send({xcale:toaDo.xcale,ycale:toaDo.ycale})

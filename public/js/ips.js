@@ -5,6 +5,7 @@ function init(){
   icon.src = "img/icon.png";
   var canvas = document.getElementById("myCanvas");
   var ctx = canvas.getContext("2d");
+  ctx.drawImage(a, 0, 0, canvas.width, canvas.height);
   function draw(){
     $.ajax({
       url: "../product",
