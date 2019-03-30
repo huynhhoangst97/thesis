@@ -48,8 +48,8 @@ $(document).ready(()=>{
         ctx.drawImage(a, 0, 0, canvas.width, canvas.height);
         ctx.beginPath();
         ctx.arc(
-          (canvas.width * response.xcale) / 3,
-          (canvas.height * response.ycale) / 3,
+          (canvas.width * response.xcale) / 5,
+          (canvas.height * response.ycale) / 5,
           8,
           0,
           2 * Math.PI
