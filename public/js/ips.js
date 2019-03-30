@@ -5,8 +5,6 @@ function init(){
   icon.src = "img/icon.png";
   var canvas = document.getElementById("myCanvas");
   var ctx = canvas.getContext("2d");
-  ctx.drawImage(a, 0, 0, canvas.width, canvas.height);
-  ctx.beginPath();
   function draw(){
     $.ajax({
       url: "../product",
@@ -15,13 +13,13 @@ function init(){
       success: function(response) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(a, 0, 0, canvas.width, canvas.height);
-        ctx.arc(
+        ctx.drawImage(
+          icon,
           (canvas.width * response.xcale) / 3,
           (canvas.height * response.ycale) / 3,
-          6,
-          0, 2 * Math.PI
+          30,
+          30
         );
-        ctx.fill();
       }
     });
   }
