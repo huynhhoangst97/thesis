@@ -37,6 +37,7 @@ $(document).ready(()=>{
   var canvas = document.getElementById("myCanvas");
   var ctx = canvas.getContext("2d");
   ctx.drawImage(a, 0, 0, canvas.width, canvas.height);
+ 
   setInterval(() => {
     $.ajax({
       url: "../product",
@@ -45,14 +46,17 @@ $(document).ready(()=>{
       success: function(response) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(a, 0, 0, canvas.width, canvas.height);
-        ctx.drawImage(
-          icon,
+        ctx.beginPath();
+        ctx.arc(
           (canvas.width * response.xcale) / 3,
           (canvas.height * response.ycale) / 3,
-          30,
-          30
+          8,
+          0,
+          2 * Math.PI
         );
+        ctx.fillStyle = "#00E76D";
+        ctx.fill();
       }
     });
-  }, 50);
+  }, 25);
 });
