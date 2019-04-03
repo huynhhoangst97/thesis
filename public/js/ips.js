@@ -40,7 +40,7 @@ $(document).ready(() => {
 
   setInterval(() => {
     $.ajax({
-      url: "../product",
+      url: "product",
       method: "POST",
       contentType: "application/json",
       success: function(response) {
@@ -48,8 +48,8 @@ $(document).ready(() => {
         ctx.drawImage(a, 0, 0, canvas.width, canvas.height);
         ctx.beginPath();
         ctx.arc(
-          (((response.xcale * 223) / 4.9 + 725) * canvas.width) / 1226,
-          (((response.ycale * 442) / 9.05 + 131) * canvas.height) / 570,
+          ((223 - (response.xcale * 223) / 4.9 + 725) * canvas.width) / 1226,
+          ((((2.7+response.ycale) * 442) / 9.05 + 131) * canvas.height) / 570,
           8,
           0,
           2 * Math.PI

@@ -3,17 +3,20 @@
     <title>Test</title>
     <script src="lib/jquery.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="lib/bootstrap.min-dark.css">
+    <link rel="stylesheet" href="css/test.css">
   </header>
   <body>
-    <div id="date"></div>
+    <!-- <div id="date"></div>
     <h1>location:</h1>
-    <div id="a"></div>
+    <div id="a"></div> -->
     <!--script-->
-    <script>
+    <!-- <script>
       $(document).ready(() => {
         setInterval(() => {
           $.ajax({
-            url: "../product",
+            url: "./product",
             method:"POST",
             contentType: "application/json",
             success: function(response) {
@@ -23,6 +26,30 @@
           });
         }, 100);
       });
-    </script>
+    </script> -->
+    <div id="login">
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="/loginPage" method="post">
+                            <h3 class="text-center text-info">Login</h3>
+                            <div class="form-group">
+                                <label for="username" class="text-info">Username:</label><br>
+                                <input type="text" name="username" id="username" class="form-control" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info">Password:</label><br>
+                                <input type="text" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
   </body>
 </html>

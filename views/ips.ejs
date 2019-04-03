@@ -15,7 +15,6 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
 </head>
-
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" style="border-radius: 0%">
         <div class="container-fluid">
@@ -40,14 +39,86 @@
                     <li><a href="./ips">Product</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Login</a></li>
+                    <li><a href="../loginPage">Login</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <div class="container-fluid" style="margin-top: 80px">
+
+    <!-----------------------------------------content----------------------------------------------------->
+    <div class="container-fluid" style="margin-top: 60px">
+        <button tyle="button" class="btn btn-info" data-toggle="modal" data-target="#tagList" id="#tagList">Tag List</button>
+        <!-- modals -->
+        <button tyle="button" class="btn btn-info" data-toggle="modal" data-target="#analysis" id="#analysis">Analysis</button>
+        <!-- modals -->
+        <div class="modal fade" id="tagList" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>The tag list</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table">
+                                    <tr class="info">
+                                        <th>Tag's name</th>
+                                        <th>Color</th>
+                                    </tr>
+                                    <tr>
+                                        <th>152A</th>
+                                        <th><i class="fas fa-circle" style="color:#00E76D"></i></th>
+                                    </tr>
+                                    <tr>
+                                        <th>0C01</th>
+                                        <th><i class="fas fa-circle" style="color:red"></i></th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table">
+                                    <tr class="info">
+                                        <th>Tag's name</th>
+                                        <th>Color</th>
+                                    </tr>
+                                    <tr>
+                                        <th>158C</th>
+                                        <th><i class="fas fa-circle" style="color:blue"></i></th>
+                                    </tr>
+                                    <tr>
+                                        <th>8305</th>
+                                        <th><i class="fas fa-circle" style="color:orchid"></i></th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button tyle="button" class="btn btn-success" data-dismiss="modal">close</button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        <div class="modal fade" id="analysis">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>The tag list</h3>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                            <button tyle="button" class="btn btn-success" data-dismiss="modal">close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="margin-top: 20px">
         <div class="row">
-            <div class="col-md-11" id="map">
+            <div class="col-md-12" id="map">
                 <canvas id="myCanvas" style="border: solid 2px red" width="1000" height="450"></canvas>
             </div>
         </div>

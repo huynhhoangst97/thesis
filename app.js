@@ -4,7 +4,12 @@ var server = require("http").Server(app);
 var io = require("socket.io")(server);
 var user = require("./model/user");
 var location = require("./model/location");
-var classLocation = require("./classLocation");
+var session = require('express-session');
+var passport = require('passport');
+var fs = require('fs');
+var bodyParser = require('body-parser');
+var localStrategy = require('passport-local').Strategy;
+
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
@@ -22,32 +27,42 @@ app.set("view engine", "ejs");
 // 	if (err) throw err;
 // })
 
-io.on("connection", socket => {
-  location.find({ tag: "aa02" }, (err, res) => {
-    if (err) throw err;
-    socket.emit("mongo", res);
-  });
-  user.showUser((err, data) => {
-    if (err) throw err;
-    socket.emit("database", data);
-  });
-  socket.emit("testAjax", Math.random());
-});
+// io.on("connection", socket => {
+//   location.find({ tag: "aa02" }, (err, res) => {
+//     if (err) throw err;
+//     socket.emit("mongo", res);
+//   });
+//   user.showUser((err, data) => {
+//     if (err) throw err;
+//     socket.emit("database", data);
+//   });
+//   socket.emit("testAjax", Math.random());
+// });
 
+//------------------ session-------------//
+// app.use(session({
+//   secret: 'secret',
+//   resave: true,
+//   saveUninitialized: true
+// }))
+
+//-----------passport config------------------
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({ secret: "mysecret" }));
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport')(passport);
+
+app.get("/loginOk",(req,res)=>{
+  res.send("hello");
+})
 // setup public folder
 app.use(express.static("public"));
 
 // -------------setup routes-----------------
-var toaDo = new classLocation();
-app.post("/product", (req, res) => {
-  location.find({ tag: "aa02" }, (err, result) => {
-  toaDo.xcale = result[0]["location"]["xcale"];
-	toaDo.ycale = result[0]["location"]["ycale"];
-  });
-  res.send({xcale:toaDo.xcale,ycale:toaDo.ycale})
-  res.send("thanh cong");
-});
 
+var product = require("./routes/product.js");
+app.use("/product",product);
 var index = require("./routes/index.js");
 app.use("/", index);
 var loginPage = require("./routes/loginPage.js");

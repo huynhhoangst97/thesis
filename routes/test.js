@@ -5,7 +5,13 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var router=express.Router();
 var location = require('../model/location');
 
-router.get("/",(req,res)=>{
-	res.render('./test.ejs');
-});
+
+router.get("/",function(req,res) {
+	if(req.isAuthenticated()){
+		res.render("./index	");
+	}else {
+		res.render("./loginPage");
+	}
+})
+
 module.exports=router;

@@ -1,7 +1,10 @@
-var express = require('express');
-var router=express.Router();
+var express =require("express");
+var router = express.Router();
+var passport=require('passport');
+router.route('/')
+        .get((req,res)=>res.render("loginPage"))
+        .post(passport.authenticate('local',{failureRedirect:"/loginPage",
+                                             successRedirect:"/ips"}));
 
-router.get('/',(req,res)=>{
-    res.render("./loginPage.ejs")
-});
-module.exports=router;
+//Export
+module.exports= router;
