@@ -71,6 +71,8 @@ var ips = require("./routes/ips.js");
 app.use("/ips", ips);
 var readData = require("./routes/readdata.js");
 app.use("/readdata", readData);
+var signup = require("./routes/signup.js");
+app.use("/signup", signup);
 var test = require("./routes/test.js");
 app.use("/test", test);
 const err = require("./routes/404.js");
