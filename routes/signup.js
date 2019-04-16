@@ -22,7 +22,7 @@ router.post('/', urlencodedParser, (req, res) => {
     var username = req.body.user;
     var password = req.body.pas;
     user.isMatchUser(username,password,(err,data)=>{
-        console.log(data);
+        res.send(data);
     })
     
 
