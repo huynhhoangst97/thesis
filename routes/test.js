@@ -7,11 +7,7 @@ var location = require('../model/location');
 
 
 router.get("/",function(req,res) {
-	if(req.isAuthenticated()){
-		res.render("./index	");
-	}else {
-		res.render("./loginPage");
-	}
+	res.render("./test");
 })
 
 module.exports=router;
