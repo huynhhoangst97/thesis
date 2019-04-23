@@ -53,9 +53,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);
 
-app.get("/loginOk",(req,res)=>{
-  res.send("hello");
-})
 // setup public folder
 app.use(express.static("public"));
 
@@ -65,14 +62,12 @@ var product = require("./routes/product.js");
 app.use("/product",product);
 var index = require("./routes/index.js");
 app.use("/", index);
-var loginPage = require("./routes/loginPage.js");
-app.use("/loginPage", loginPage);
+var user = require("./routes/user.js");
+app.use("/user", user);
 var ips = require("./routes/ips.js");
 app.use("/ips", ips);
 var readData = require("./routes/readdata.js");
 app.use("/readdata", readData);
-var signup = require("./routes/signup.js");
-app.use("/signup", signup);
 var test = require("./routes/test.js");
 app.use("/test", test);
 const err = require("./routes/404.js");

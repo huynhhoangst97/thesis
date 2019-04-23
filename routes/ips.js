@@ -9,7 +9,7 @@ router.get("/",function(req,res) {
 	if(req.isAuthenticated()){
         res.render("./ips")
 	}else {
-		res.render("./loginPage");
+		res.render("./login");
 	}
 })
 
