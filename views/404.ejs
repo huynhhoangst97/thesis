@@ -1,87 +1,146 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>404 Not Found</title>
-    <script src="lib/jquery.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <link rel="icon" type="image/png" href="img/404.jpg" />
+  <title>404 HTML</title> 
 
-    <link rel="stylesheet" href="lib/bootstrap.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <script src="lib/bootstrap.min.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700" rel="stylesheet">
 
+  <!-- Custom stlylesheet -->
+  <style>
+    * {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    #notfound {
+      position: relative;
+      height: 100vh;
+    }
+
+    #notfound .notfound {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .notfound {
+      max-width: 520px;
+      width: 100%;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .notfound .notfound-404 {
+      position: relative;
+      height: 200px;
+      margin: 0px auto 20px;
+      z-index: -1;
+    }
+
+    .notfound .notfound-404 h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 236px;
+      font-weight: 200;
+      margin: 0px;
+      color: #211b19;
+      text-transform: uppercase;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .notfound .notfound-404 h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      text-transform: uppercase;
+      color: #211b19;
+      background: #fff;
+      padding: 10px 5px;
+      margin: auto;
+      display: inline-block;
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      right: 0;
+    }
+
+    .notfound a {
+      font-family: 'Montserrat', sans-serif;
+      display: inline-block;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fff;
+      text-transform: uppercase;
+      padding: 13px 23px;
+      background: #ff6300;
+      font-size: 18px;
+      -webkit-transition: 0.2s all;
+      transition: 0.2s all;
+    }
+
+    .notfound a:hover {
+      color: #ff6300;
+      background: #211b19;
+    }
+
+    @media only screen and (max-width: 767px) {
+      .notfound .notfound-404 h1 {
+        font-size: 148px;
+      }
+    }
+
+    @media only screen and (max-width: 480px) {
+      .notfound .notfound-404 {
+        height: 148px;
+        margin: 0px auto 10px;
+      }
+
+      .notfound .notfound-404 h1 {
+        font-size: 86px;
+      }
+
+      .notfound .notfound-404 h2 {
+        font-size: 16px;
+      }
+
+      .notfound a {
+        padding: 7px 15px;
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse" style="border-radius: 0%">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="../"
-                    style="font-family:'Kaushan Script',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';font-style:italic;font-weight: bold;color: #fed136">Indoor
-                    Positioning Systems</a>
-            </div>
+  <div id="notfound">
+    <div class="notfound">
+      <div class="notfound-404">
+        <h1>Oops!</h1>
+        <h2>404 - The Page can't be found</h2>
+      </div>
+      <a href="/">Go TO Homepage</a>
+    </div>
+  </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">About us <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Product</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Login</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-    <h1>404 Not Found</h1>
-    <footer class="navbar-fixed-bottom">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4">
-              <span class="copyright">Copyright &copy; Lab 110B3</span>
-            </div>
-            <div class="col-md-4">
-              <ul class="list-inline social-buttons">
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fab fa-twitter" style="margin-top: 12px;"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fab fa-facebook-f" style="margin-top: 12px;"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fab fa-linkedin-in" style="margin-top: 12px;"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="col-md-4">
-              <ul class="list-inline quicklinks">
-                <li class="list-inline-item">
-                  <a href="#">Privacy Policy</a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">Terms of Use</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
 </body>
 
 </html>

@@ -8,6 +8,7 @@ var session = require('express-session');
 var passport = require('passport');
 var fs = require('fs');
 var bodyParser = require('body-parser');
+const flash = require('connect-flash');
 var localStrategy = require('passport-local').Strategy;
 
 app.set("views", "./views");
@@ -48,10 +49,19 @@ app.set("view engine", "ejs");
 
 //-----------passport config------------------
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ secret: "mysecret" }));
+app.use(
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);
+
+//connect flash
+app.use(flash());
 
 // setup public folder
 app.use(express.static("public"));
@@ -59,7 +69,7 @@ app.use(express.static("public"));
 // -------------setup routes-----------------
 
 var product = require("./routes/product.js");
-app.use("/product",product);
+app.use("/product", product);
 var index = require("./routes/index.js");
 app.use("/", index);
 var user = require("./routes/user.js");
