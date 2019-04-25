@@ -27,12 +27,13 @@
 			<form class="form-detail" action="/user/register" method="post">
 				<h2>Register Account Form</h2>
 				<% if (msg.length > 0) { %>
-				<div class="alert alert-warning alert-dismissible" role="alert">
+				<div class="alert alert-info alert-dismissible" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
 							aria-hidden="true">&times;</span></button>
 					<%= msg %>
 				</div>
 				<% } %>
+				
 				<div class="form-row">
 					<label for="full-name">Full Name</label>
 					<input type="text" name="fullName" id="full-name" class="input-text" placeholder="Your Name"

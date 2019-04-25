@@ -39,7 +39,7 @@
                     <li><a href="./ips">Product</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../loginPage">Login</a></li>
+                    <li><a href="/user/logout">Logout</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -47,6 +47,13 @@
 
     <!-----------------------------------------content----------------------------------------------------->
     <div class="container-fluid" style="margin-top: 60px">
+        <% if (user.length > 0) { %>
+            <div class="alert alert-success alert-dismissible" role="alert" style="font-size:12px ">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <strong>Success!</strong><%= user %>
+            </div>
+        <% } %>
         <button tyle="button" class="btn btn-info" data-toggle="modal" data-target="#tagList" id="#tagList">Tag List</button>
         <!-- modals -->
         <button tyle="button" class="btn btn-info" data-toggle="modal" data-target="#analysis" id="#analysis">Analysis</button>

@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 module.exports = (passport) => {
     passport.use(new localStrategy(
         (username, password, done) => {
-            let sql = "Select * from user Where user = ?";
+            let sql = "Select * from user Where email = ?";
             db.query(sql, username, (err, data) => {
                 //if (err) throw err;
                 if (data[0] === undefined) {
@@ -14,7 +14,6 @@ module.exports = (passport) => {
                 else {
                     bcrypt.compare(password, data[0]['password'], (err, isMatch) => {
                         if (err) throw err;
-
                         if (isMatch) {
                             return done(null, data[0]);
                         } else {
@@ -24,24 +23,25 @@ module.exports = (passport) => {
                 }
             })
         }
-
     ));
 
+    //passport serializeUser
+    passport.serializeUser((user, done) => {
+        done(null, user.email);
+    });
+
     passport.deserializeUser((name, done) => {
-        let sql = "Select * from user Where user = ?";
-        db.query(sql,name,(err,data)=>{
-            if(data[0]===undefined){
+        let sql = "Select * from user Where email = ?";
+        db.query(sql, name, (err, data) => {
+            if (data[0] === undefined) {
                 return done(null, false);
-            } else{
+            } else {
                 return done(null, data[0]);
             }
         })
     });
 
-    //passport serializeUser
-    passport.serializeUser((user, done) => {
-        done(null, user.user);
-    });
+    
 
 
 }
@@ -64,7 +64,7 @@ module.exports = (passport) => {
 //             });
 //         }
 //     ));
-    
+
 //     //passport deserializeUser
 //     passport.deserializeUser((name, done) => {
 //         fs.readFile("./userDB.json", function (err, data) {

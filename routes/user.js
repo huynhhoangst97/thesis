@@ -3,6 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 var db = require('../connectMysql');
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const bodyParser = require('body-parser');
 const { forwardAuthenticated } = require('../config/auth');
 
@@ -12,7 +13,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 
 // Register Page
-router.get('/register', forwardAuthenticated, (req, res) => res.render('register', { msg: '' }));
+router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
 
 //register
 router.post('/register', urlencodedParser, (req, res) => {
@@ -22,19 +23,22 @@ router.post('/register', urlencodedParser, (req, res) => {
 
   // check password
   if (password.length < 6) {
-    res.render('register', { msg: 'password is so shot !!!' });
+    res.render('register', { msg: 'Please enter more than 6 characters  !!!' });
   } else {
-    let sql = "Select * from test Where email = ?"
+    let sql = "Select * from user Where email = ?"
     db.query(sql, email, (err, data) => {
       // email isn't exist
       if (data[0] === undefined) {
-        let post = { fullName: fullName, email: email, password: password };
-        let sql = "INSERT INTO test SET ?";
-        db.query(sql, post, (err, result) => {
-          res.render('register', { msg: 'thanh cong!!!' });
-        })
+        bcrypt.hash(password, saltRounds, (err, data) => {
+          
+          let post = { fullName: fullName, email: email, password: data };
+          let sql = "INSERT INTO user SET ?";
+          db.query(sql, post, (err, result) => {
+            res.render('login', { msg_success: ' Account already create!!!' });
+          })
+        });
       } else {
-        res.render('register', { msg: 'email is exist !!!' })
+        res.render('register', { msg: "Email already exists !!!" })
       }
     });
   }
@@ -49,6 +53,12 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
+// Logout
+router.get('/logout', (req, res) => {
+  req.session.destroy(function (err) {
+    res.redirect('/');
+  });
+});
 
 //Export
 module.exports = router;

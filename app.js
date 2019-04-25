@@ -47,8 +47,7 @@ app.set("view engine", "ejs");
 //   saveUninitialized: true
 // }))
 
-//-----------passport config------------------
-app.use(bodyParser.urlencoded({ extended: true }));
+// Express session
 app.use(
   session({
     secret: 'secret',
@@ -56,12 +55,28 @@ app.use(
     saveUninitialized: true
   })
 );
+
+//-----------passport config------------------
 app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);
 
+// Express body parser
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+
 //connect flash
 app.use(flash());
+
+// Global variables
+app.use(function(req, res, next) {
+  res.locals.msg_success = req.flash('msg_success');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.msg = req.flash('msg');
+  next();
+});
+
 
 // setup public folder
 app.use(express.static("public"));
