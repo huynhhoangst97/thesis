@@ -64,8 +64,6 @@ require('./config/passport')(passport);
 // Express body parser
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-
 //connect flash
 app.use(flash());
 
@@ -76,7 +74,6 @@ app.use(function(req, res, next) {
   res.locals.msg = req.flash('msg');
   next();
 });
-
 
 // setup public folder
 app.use(express.static("public"));
