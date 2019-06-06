@@ -1,123 +1,113 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
     <meta charset="utf-8">
-    <title>IPS 110B3</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="lib/jquery.js"></script>
-    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-    <link rel="stylesheet" href="lib/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <script src="lib/bootstrap.min.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <title>Indoor Positioning System</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="css/ips.css">
 </head>
+
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" style="border-radius: 0%">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="./"
-                    style="font-family:'Kaushan Script',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';font-style:italic;font-weight: bold;color: #fed136">Indoor
-                    Positioning Systems</a>
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Dashboard</h3>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">About us <span class="sr-only">(current)</span></a></li>
+            <ul class="list-unstyled components">
+                <p style="font-size: 29px;">Status</p>
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">TAGs</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li class="list"">DW2096</li>
+                            <li class=" list"">DW0384</li>
+                        <li class="list"">DW4134</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href=" #pageSubmenu" data-toggle="collapse" aria-expanded="false">GATEWAYs</a>
+                            <ul class="collapse list-unstyled" id="pageSubmenu">
+                                <li class="list"">DW2096</li>
+                            <li class=" list"">DW0384</li>
+                                <li class="list"">DW4134</li>
+                        </ul>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/user/logout">Log out</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
 
-    <!-----------------------------------------content----------------------------------------------------->
-    <div class="container-fluid" style="margin-top: 60px">
-        <% include ./statusTag.ejs %>
-        <button tyle="button" class="btn btn-info" data-toggle="modal" data-target="#tagList" id="#tagList">Tag List</button>
-        <!-- modals -->
-        <button tyle="button" class="btn btn-info" data-toggle="modal" data-target="#analysis" id="#analysis">Analysis</button>
-        <!-- modals -->
-        <div class="modal fade" id="analysis">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3>The tag list</h3>
-                    </div>
-                    <div class="modal-body">
+                <ul class=" list-unstyled CTAs">
+                                <li><a href="https://www.decawave.com/" class="download" target="_blank">Go to
+                                        Decawave</a></li>
+                                <li><a href="./.." class="article">Back to Home</a></li>
+                            </ul>
+        </nav>
 
+        <!-- Page Content Holder -->
+        <div id="content">
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <button type="button" id="sidebarCollapse" class="navbar-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
                     </div>
-                    <div class="modal-footer">
-                            <button tyle="button" class="btn btn-success" data-dismiss="modal">close</button>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="./user/logout">Log out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="line"></div>
+            <div class="container-fluid" style="margin-top: 20px">
+                <div class="row">
+                    <div class="col-md-12" id="map">
+                        <canvas id="myCanvas" style="border: solid 2px red" width="1000" height="450"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid" style="margin-top: 20px">
-        <div class="row">
-            <div class="col-md-12" id="map">
-                <canvas id="myCanvas" style="border: solid 2px red" width="1000" height="450"></canvas>
-            </div>
-        </div>
-    </div>
-    <footer class="" style="margin-top: 50px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; Lab 110B3</span>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline social-buttons">
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-twitter" style="margin-top: 12px;"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-facebook-f" style="margin-top: 12px;"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-linkedin-in" style="margin-top: 12px;"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline quicklinks">
-                        <li class="list-inline-item">
-                            <a href="#">Privacy Policy</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">Terms of Use</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
 
-    <!--script-->
+    <div class="container-fluid" id="width"></div>
+
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!-- Bootstrap Js CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="lib/imageloader.min.js"></script>
     <script type="text/javascript" src="lib/canvaszoom.min.js"></script>
     <script src="js/ips.js"></script>
-    <script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+
+            setInterval(() => {
+                if ($('#width').width() > 400) {
+                    $("#myCanvas").css("width", $('#width').width() - 50);
+                } else {
+                    $("#myCanvas").css("width", $('#width').width() - 60);
+                }
+            }, 1000)
+
+
+        });
     </script>
 </body>
 
