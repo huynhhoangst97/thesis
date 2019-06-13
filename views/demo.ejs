@@ -1,0 +1,174 @@
+<html>
+
+<head>
+    <title>IPS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col-md-9" id="map">
+                <canvas id="myCanvas" style="border: solid 1px black;" width="1000" height="450"></canvas>
+            </div>
+            <div class="col-md-3">
+                <table class="table" id="shown">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col" colspan="2">location (m)</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr style="background: yellow">
+                            <th>Anhor</th>
+                            <th>x</th>
+                            <th>y</th>
+                        </tr>
+                        <tr>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                        </tr>
+                        <tr>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                        </tr>
+                        <tr>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                        </tr>
+                        <tr>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                        </tr>
+                        <tr style="background: yellow">
+                            <th>Tag</th>
+                            <th>x</th>
+                            <th>y</th>
+                        </tr>
+                        <tr>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                        </tr>
+                        <tr>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                            <td>NaN</td>
+                        </tr>
+                        <tr style="background: black; color:white">
+                            <th scope="col">ID</th>
+                            <td align="center" colspan="2">IPv4</td>
+                        </tr>
+                        <tr>
+                            <td>NaN</td>
+                            <td align="center" colspan="2">NaN</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        // var canvas = document.getElementById("myCanvas");
+        // var ctx = canvas.getContext("2d");
+        // ctx.font ='50px FontAwesome';
+        // ctx.fillStyle ="red"
+        // ctx.fillText("\uf0d7",200,200);
+        // ctx.fillText("\uf0d7",200,100); 
+
+        var hang_1 = document.getElementById("shown").rows[2].cells;
+        var hang_2 = document.getElementById("shown").rows[3].cells;
+        var hang_3 = document.getElementById("shown").rows[4].cells;
+        var hang_4 = document.getElementById("shown").rows[5].cells;
+
+        var hang_5 = document.getElementById("shown").rows[7].cells;
+        var hang_6 = document.getElementById("shown").rows[8].cells;
+
+        var hang_7 = document.getElementById("shown").rows[10].cells;
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var y, x;//
+
+        function init() {
+            window.requestAnimationFrame(draw);
+        }
+
+        function drawBall() {
+            ctx.beginPath();
+            ctx.font = '50px FontAwesome';
+            ctx.fillStyle = "red";
+            ctx.fillText("\uf0d7", 100, 50);
+            ctx.fillText("\uf0d7", 110, 300);
+            ctx.fillText("\uf0d7", 700, 70);
+            ctx.fillText("\uf0d7", 800, 400);
+            ctx.fillStyle = "blue";
+            ctx.fillText("\uf0d7", x * canvas.width / 5, y * canvas.height / 5);
+            ctx.closePath();
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBall();
+            $.ajax({
+                url: "../product",
+                method: "POST",
+                contentType: "application/json",
+                success: function (response) {
+                    //console.log(response.anchor1_xcale);
+                    anchor1_xcale = response.anchor1_xcale;
+                    anchor1_ycale = response.anchor1_ycale;
+                    anchor2_xcale = response.anchor2_xcale;
+                    anchor2_ycale = response.anchor2_ycale;
+
+                    tag1_xcale = response.tag1_xcale;
+                    tag1_ycale = response.tag1_ycale;
+                    tag2_xcale = response.tag2_xcale;
+                    tag2_ycale = response.tag2_ycale;
+
+                    gateway1_tag = response.gateway1_tag;
+                    gateway1_id = response.gateway1_id;
+
+                    hang_1[0].innerHTML = "DW5583"
+                    hang_1[1].innerHTML = anchor1_xcale;
+                    hang_1[2].innerHTML = anchor1_ycale;
+
+                    hang_2[0].innerHTML = "DW8035"
+                    hang_2[1].innerHTML = anchor2_xcale;
+                    hang_2[2].innerHTML = anchor2_ycale;
+
+                    // tag
+                    hang_5[0].innerHTML = "DWa202"
+                    hang_5[1].innerHTML = tag1_xcale;
+                    hang_5[2].innerHTML = tag1_ycale;
+
+                    hang_6[0].innerHTML = "DW15a2"
+                    hang_6[1].innerHTML = tag2_xcale;
+                    hang_6[2].innerHTML = tag2_ycale;
+                    
+                    //gateway
+                    hang_7[0].innerHTML = gateway1_tag;
+                    hang_7[1].innerHTML = gateway1_id;
+                }
+            });
+            window.requestAnimationFrame(draw);
+        }
+        init();
+    </script>
+</body>
+
+</html>

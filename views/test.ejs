@@ -1,113 +1,83 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>Indoor Positioning System</title>
-
-    <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="css/test.css">
+    <title>IPS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <div class="wrapper">
-        <!-- Sidebar Holder -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>Dashboard</h3>
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col-md-10" id="map">
+                <canvas id="myCanvas" style="border: solid 1px black; background: #eff0f1" width="1000"
+                    height="450"></canvas>
             </div>
-
-            <ul class="list-unstyled components">
-                <p style="font-size: 29px;">Status</p>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">TAGs</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li class="list"">DW2096</li>
-                            <li class=" list"">DW0384</li>
-                        <li class="list"">DW4134</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href=" #pageSubmenu" data-toggle="collapse" aria-expanded="false">GATEWAYs</a>
-                            <ul class="collapse list-unstyled" id="pageSubmenu">
-                                <li class="list"">DW2096</li>
-                            <li class=" list"">DW0384</li>
-                                <li class="list"">DW4134</li>
-                        </ul>
-                </ul>
-
-                <ul class=" list-unstyled CTAs">
-                                <li><a href="https://www.decawave.com/" class="download" target="_blank">Go to
-                                        Decawave</a></li>
-                                <li><a href="./.." class="article">Back to Home</a></li>
-                            </ul>
-        </nav>
-
-        <!-- Page Content Holder -->
-        <div id="content">
-
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-
-                    <div class="navbar-header">
-                        <button type="button" id="sidebarCollapse" class="navbar-btn">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
-                    </div>
-
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="./user/logout">Log out</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-            <div class="line"></div>
-            <div class="container-fluid" style="margin-top: 20px">
-                <div class="row">
-                    <div class="col-md-12" id="map">
-                        <canvas id="myCanvas" style="border: solid 2px red" width="1000" height="450"></canvas>
-                    </div>
-                </div>
+            <div class="col-md-2">
+                <h1>X</h1>
+                <h1 id="x">a</h1>
+                <br>
+                <h1>y</h1>
+                <h1 id="y">a</h1>
             </div>
         </div>
     </div>
+    <script>
+        // var canvas = document.getElementById("myCanvas");
+        // var ctx = canvas.getContext("2d");
+        // ctx.font ='50px FontAwesome';
+        // ctx.fillStyle ="red"
+        // ctx.fillText("\uf0d7",200,200);
+        // ctx.fillText("\uf0d7",200,100); 
 
-    <div class="container-fluid" id="width"></div>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var y, x;//
 
+        function init() {
+            window.requestAnimationFrame(draw);
+        }
 
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <!-- Bootstrap Js CDN -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="lib/imageloader.min.js"></script>
-    <script type="text/javascript" src="lib/canvaszoom.min.js"></script>
-    <script src="js/ips.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-                $(this).toggleClass('active');
-            });
+        function drawBall() {
+            ctx.beginPath();
+            ctx.font = '50px FontAwesome';
+            ctx.fillStyle = "red";
+            ctx.fillText("\uf0d7",100,50);
+            ctx.fillText("\uf0d7",110,300);
+            ctx.fillText("\uf0d7",700,70);
+            ctx.fillText("\uf0d7",800,400);
+            ctx.fillStyle = "blue";
+            ctx.fillText("\uf0d7", x*canvas.width/5, y*canvas.height/5);
+            ctx.closePath();
+        }
 
-            setInterval(() => {
-                if ($('#width').width() > 400) {
-                    $("#myCanvas").css("width", $('#width').width() - 50);
-                } else {
-                    $("#myCanvas").css("width", $('#width').width() - 10);
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBall();
+            $.ajax({
+                url: "../product",
+                method: "POST",
+                contentType: "application/json",
+                success: function (response) {
+                    x = response.tag1_xcale;
+                    y = response.tag1_ycale;
+                    $('#x').empty();
+                    $("#x").append("="+x);
+                    $('#y').empty();
+                    $("#y").append("="+y);
                 }
-            }, 100)
-
-
-        });
+            });
+            window.requestAnimationFrame(draw);
+        }
+        init();
     </script>
 </body>
 

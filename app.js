@@ -79,7 +79,10 @@ app.use(function(req, res, next) {
 app.use(express.static("public"));
 
 // -------------setup routes-----------------
-
+var gateway = require("./routes/gateway.js");
+app.use("/gateway",gateway);
+var anchor = require("./routes/anchor.js");
+app.use("/anchor",anchor);
 var product = require("./routes/product.js");
 app.use("/product", product);
 var index = require("./routes/index.js");
@@ -90,6 +93,8 @@ var ips = require("./routes/ips.js");
 app.use("/ips", ips);
 var readData = require("./routes/readdata.js");
 app.use("/readdata", readData);
+var demo = require("./routes/demo.js");
+app.use("/demo", demo);
 var test = require("./routes/test.js");
 app.use("/test", test);
 const err = require("./routes/404.js");
