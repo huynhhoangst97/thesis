@@ -19,14 +19,7 @@
         <div class="row">
             <div class="col-md-10" id="map">
                 <canvas id="myCanvas" style="border: solid 1px black; background: #eff0f1" width="1000"
-                    height="450"></canvas>
-            </div>
-            <div class="col-md-2">
-                <h1>X</h1>
-                <h1 id="x">a</h1>
-                <br>
-                <h1>y</h1>
-                <h1 id="y">a</h1>
+                    height="600"></canvas>
             </div>
         </div>
     </div>
@@ -46,22 +39,100 @@
             window.requestAnimationFrame(draw);
         }
 
-        function drawBall() {
+        function drawXY() {
             ctx.beginPath();
-            ctx.font = '50px FontAwesome';
+            ctx.strokeStyle = "green";
+            ctx.moveTo(200, 0);
+            ctx.lineTo(200, canvas.width);
+            ctx.stroke();
+            ctx.moveTo(0, canvas.height - 100);
+            ctx.lineTo(canvas.width, canvas.height - 100);
+            ctx.stroke();
+            ctx.fillStyle = "green"
+            ctx.font = "20px arial";
+            ctx.fillText("x", 185,15)
+            ctx.fillText("(m)", 175,35)
+            ctx.fillText("2", 180,405)
+            ctx.fillText("4", 180,305)
+            ctx.fillText("6", 180,205)
+            ctx.fillText("8", 180,105)
+            ctx.fillText("y (m)",950,525)
+            ctx.fillText("-2", 95,525)
+            ctx.fillText("0", 201,525)
+            ctx.fillText("2", 295,525)
+            ctx.fillText("4", 395,525)
+            ctx.fillText("6", 495,525)
+            ctx.fillText("8", 595,525)
+            ctx.fillText("10", 695,525)
+            ctx.fillText("12", 795,525)
+            ctx.fillText("14", 895,525)
+            ctx.closePath();
+            drawBall(100,canvas.height - 100);
+            drawBall(300,canvas.height - 100);
+            drawBall(400,canvas.height - 100);
+            drawBall(500,canvas.height - 100);
+            drawBall(600,canvas.height - 100);
+            drawBall(700,canvas.height - 100);
+            drawBall(800,canvas.height - 100);
+            drawBall(900,canvas.height - 100);
+            drawBall(1000,canvas.height - 100);
+
+            drawBall(200,canvas.height )
+            drawBall(200,canvas.height - 100)
+            drawBall(200,canvas.height - 200)
+            drawBall(200,canvas.height - 300)
+            drawBall(200,canvas.height - 400)
+            drawBall(200,canvas.height - 500)
+            drawBall(200,canvas.height - 600)
+        }
+
+        function drawBall(x,y) {
+            ctx.beginPath();
+            ctx.arc(x,y,3,0,2 * Math.PI);
+            ctx.fillStyle = "green";
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function drawFirstAnchor() {
+            ctx.beginPath();
+            ctx.font = '30px FontAwesome';
             ctx.fillStyle = "red";
-            ctx.fillText("\uf0d7",100,50);
-            ctx.fillText("\uf0d7",110,300);
-            ctx.fillText("\uf0d7",700,70);
-            ctx.fillText("\uf0d7",800,400);
+            ctx.fillText("\uf0d7", 192, canvas.height - 90);
+            ctx.font = '20px Arial';
+            ctx.fillText('DW5322',0*1000/20-8+180, (500-0*500/10)-10)
+            ctx.closePath();
+        }
+
+        function drawAnchor(x,y,name) {
+            ctx.beginPath();
+            ctx.font = '30px FontAwesome';
+            ctx.fillStyle = "red";
+            ctx.fillText("\uf0d7",y*1000/20-8+200, (500-x*500/10)+10);
+            ctx.font = '20px Arial';
+            ctx.fillText(name,y*1000/20-8+180, (500-x*500/10)-10);
+            ctx.closePath();
+        }
+        
+        function drawTag(x,y,name) {
+            ctx.beginPath();
+            ctx.font = '30px FontAwesome';
             ctx.fillStyle = "blue";
-            ctx.fillText("\uf0d7", x*canvas.width/5, y*canvas.height/5);
+            ctx.fillText("\uf0d7",y*1000/20-8+200, (500-x*500/10)+10);
+            ctx.font = '20px Arial';
+            ctx.fillText(name,y*1000/20-8+180, (500-x*500/10)-10)
+            ctx.fillText("("+x+";"+y+")",y*1000/20-8+170, (500-x*500/10)+25)
             ctx.closePath();
         }
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawBall();
+            drawXY();
+            drawFirstAnchor();
+            drawTag(2.43123,2.34554,"dw1355");
+            drawAnchor(8,0,"dw8304");
+            drawAnchor(8,12,"dw1355");
+            drawAnchor(0,12,"dw1355");
             $.ajax({
                 url: "../product",
                 method: "POST",
@@ -70,9 +141,9 @@
                     x = response.tag1_xcale;
                     y = response.tag1_ycale;
                     $('#x').empty();
-                    $("#x").append("="+x);
+                    $("#x").append("=" + x);
                     $('#y').empty();
-                    $("#y").append("="+y);
+                    $("#y").append("=" + y);
                 }
             });
             window.requestAnimationFrame(draw);
